@@ -35,7 +35,7 @@ if (args.trimming) == False:
           f.write("%s" % item) 
   
   extr_25000_reads(args.inp[0])
-  name_output = args.inp[0].replace(".fastq.gz", "") + "_25000_reads" + ".fastq"
+  name_output = os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads" + ".fastq"
   write_reads(name_output)
   
   lengte_reads= []
@@ -72,7 +72,7 @@ print "Running groot"
 
 if noPrefix == True:
 
-  groot(trimmed_R1, trimmed_R2, args.inp[0].replace(".fastq.gz", ""), trimmed_SE, filtered_R1, filtered_R2, filtered_SE)
+  groot(trimmed_R1, trimmed_R2, os.path.basename(args.inp[0].replace(".fastq.gz", "")), trimmed_SE, filtered_R1, filtered_R2, filtered_SE)
 
 
 if noPrefix == False:
@@ -82,7 +82,7 @@ if noPrefix == False:
 
 print "Done"
 
-if os.path.exists(args.inp[0].replace(".fastq.gz", "") + "_25000_reads.fastq"):
-  os.remove(args.inp[0].replace(".fastq.gz", "") + "_25000_reads.fastq")
-if os.path.exists(args.inp[1].replace(".fastq.gz", "") + "_25000_reads.fastq"):
-  os.remove(args.inp[1].replace(".fastq.gz", "") + "_25000_reads.fastq")  
+if os.path.exists(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads.fastq"):
+  os.remove(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads.fastq")
+if os.path.exists(os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads.fastq"):
+  os.remove(os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads.fastq")  

@@ -44,49 +44,49 @@ if args.prefix is None:
   
 if noPrefix == True:
     
-  filtered_R1 = args.inp[0].replace(".fastq.gz", "") + "_noMatch_1.fastq"  
-  filtered_R2 = args.inp[0].replace(".fastq.gz", "") + "_noMatch_2.fastq"     
-  filtered_SE = args.inp[0].replace(".fastq.gz", "") + "_noMatch.fastq"
+  filtered_R1 = os.path.basename(args.inp[0].replace(".fastq.gz", "") + "_noMatch_1.fastq")  
+  filtered_R2 = os.path.basename(args.inp[0].replace(".fastq.gz", "") + "_noMatch_2.fastq")     
+  filtered_SE = os.path.basename(args.inp[0].replace(".fastq.gz", "") + "_noMatch.fastq")
   
-  trimmed_SE = args.inp[0].replace(".fastq.gz", "") + "_trimmed.fastq.gz"  
-  trimmed_R1 = args.inp[0].replace(".fastq.gz", "") + "_trimmed_1.fastq.gz"
-  trimmed_R2 = args.inp[1].replace(".fastq.gz", "") + "_trimmed_2.fastq.gz"
+  trimmed_SE = os.path.basename(args.inp[0].replace(".fastq.gz", "") + "_trimmed.fastq.gz")  
+  trimmed_R1 = os.path.basename(args.inp[0].replace(".fastq.gz", "") + "_trimmed_1.fastq.gz")
+  trimmed_R2 = os.path.basename(args.inp[1].replace(".fastq.gz", "") + "_trimmed_2.fastq.gz")
  
 if noPrefix == False:  
   
-  filtered_R1 = args.prefix + "_noMatch_1.fastq"  
-  filtered_R2 = args.prefix + "_noMatch_2.fastq"         
-  filtered_SE = args.prefix + "_noMatch.fastq"
+  filtered_R1 = os.path.basename(args.prefix + "_noMatch_1.fastq")  
+  filtered_R2 = os.path.basename(args.prefix + "_noMatch_2.fastq")         
+  filtered_SE = os.path.basename(args.prefix + "_noMatch.fastq")
 
-  trimmed_SE = args.prefix + "_trimmed.fastq.gz"  
-  trimmed_R1 = args.prefix + "_trimmed_1.fastq.gz"
-  trimmed_R2 = args.prefix + "_trimmed_2.fastq.gz"
+  trimmed_SE = os.path.basename(args.prefix + "_trimmed.fastq.gz")  
+  trimmed_R1 = os.path.basename(args.prefix + "_trimmed_1.fastq.gz")
+  trimmed_R2 = os.path.basename(args.prefix + "_trimmed_2.fastq.gz")
 
 if (args.trimming) == False and (args.screening) == True:
   if noPrefix == True:
       
-    filtered_R1 = args.inp[0].replace(".fastq.gz", "") + "_noMatch_1.fastq"  
-    filtered_R2 = args.inp[0].replace(".fastq.gz", "") + "_noMatch_2.fastq"     
-    filtered_SE = args.inp[0].replace(".fastq.gz", "") + "_noMatch.fastq"
+    filtered_R1 = os.path.basename(args.inp[0].replace(".fastq.gz", "") + "_noMatch_1.fastq")  
+    filtered_R2 = os.path.basename(args.inp[0].replace(".fastq.gz", "") + "_noMatch_2.fastq")     
+    filtered_SE = os.path.basename(args.inp[0].replace(".fastq.gz", "") + "_noMatch.fastq")
     
-    trimmed_SE = args.inp[0]
-    trimmed_R1 = args.inp[0]
-    trimmed_R2 = args.inp[1]
+    trimmed_SE = os.path.basename(args.inp[0])
+    trimmed_R1 = os.path.basename(args.inp[0])
+    trimmed_R2 = os.path.basename(args.inp[1])
    
   if noPrefix == False:  
     
-    filtered_R1 = args.prefix + "_noMatch_1.fastq"  
-    filtered_R2 = args.prefix + "_noMatch_2.fastq"         
-    filtered_SE = args.prefix + "_noMatch.fastq"
+    filtered_R1 = os.path.basename(args.prefix + "_noMatch_1.fastq")  
+    filtered_R2 = os.path.basename(args.prefix + "_noMatch_2.fastq")         
+    filtered_SE = os.path.basename(args.prefix + "_noMatch.fastq")
   
-    trimmed_SE = args.inp[0]
-    trimmed_R1 = args.inp[0]
-    trimmed_R2 = args.inp[1]
+    trimmed_SE = os.path.basename(args.inp[0])
+    trimmed_R1 = os.path.basename(args.inp[0])
+    trimmed_R2 = os.path.basename(args.inp[1])
 
 if (args.trimming) == False and (args.screening) == False:
-  trimmed_SE = args.inp[0]
-  trimmed_R1 = args.inp[0]
-  trimmed_R2 = args.inp[1] 
+  trimmed_SE = os.path.basename(args.inp[0])
+  trimmed_R1 = os.path.basename(args.inp[0])
+  trimmed_R2 = os.path.basename(args.inp[1]) 
  
 script_location = os.path.dirname(sys.argv[0])
 script_dir = os.path.abspath(script_location) 

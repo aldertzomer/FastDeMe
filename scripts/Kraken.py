@@ -35,7 +35,7 @@ if (args.trimming) == False:
           f.write("%s" % item)   
 
   extr_25000_reads(args.inp[0])
-  name_output = args.inp[0].replace(".fastq.gz", "") + "_25000_reads" + ".fastq"
+  name_output = os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads" + ".fastq"
   write_reads(name_output)
   
   for seq_record in SeqIO.parse(name_output, "fastq"):
@@ -47,17 +47,17 @@ print "Running Kraken2"
 
 def Kraken2(prefix, input_R1, input_R2, input_SE, input_filtered_R1, input_filtered_R2, input_filtered_SE):
   if (args.pe) and BioBloomCategorizer == False:
-    os.system('{} --db {} --threads {} --report {}_kraken_report.txt --output {}_kraken_output.txt --paired {} {}'.format(os.path.join(script_dir, "binaries/kraken2/kraken2"), os.path.join(script_dir, "db/kraken2_bacteria_db"), args.threads, prefix, args.inp[0].replace(".fastq.gz", ""), input_R1, input_R2))
+    os.system('{} --db {} --threads {} --report {}_kraken_report.txt --output {}_kraken_output.txt --paired {} {}'.format(os.path.join(script_dir, "binaries/kraken2/kraken2"), os.path.join(script_dir, "db/kraken2_bacteria_db"), args.threads, prefix, os.path.basename(args.inp[0].replace(".fastq.gz", "")), input_R1, input_R2))
   
   if not (args.pe) and BioBloomCategorizer == False:
-    os.system('{} --db {} --threads {} --report {}_kraken_report.txt --output {}_kraken_output.txt {}'.format(os.path.join(script_dir, "binaries/kraken2/kraken2"), os.path.join(script_dir, "db/kraken2_bacteria_db"), args.threads, prefix, args.inp[0].replace(".fastq.gz", ""), input_SE))  
+    os.system('{} --db {} --threads {} --report {}_kraken_report.txt --output {}_kraken_output.txt {}'.format(os.path.join(script_dir, "binaries/kraken2/kraken2"), os.path.join(script_dir, "db/kraken2_bacteria_db"), args.threads, prefix, os.path.basename(args.inp[0].replace(".fastq.gz", "")), input_SE))  
   
   
   if (args.pe) and BioBloomCategorizer == True:
-    os.system('{} --db {} --threads {} --report {}_kraken_report.txt --output {}_kraken_output.txt --paired {} {}'.format(os.path.join(script_dir, "binaries/kraken2/kraken2"), os.path.join(script_dir, "db/kraken2_bacteria_db"), args.threads, prefix, args.inp[0].replace(".fastq.gz", ""), input_filtered_R1, input_filtered_R2))
+    os.system('{} --db {} --threads {} --report {}_kraken_report.txt --output {}_kraken_output.txt --paired {} {}'.format(os.path.join(script_dir, "binaries/kraken2/kraken2"), os.path.join(script_dir, "db/kraken2_bacteria_db"), args.threads, prefix, os.path.basename(args.inp[0].replace(".fastq.gz", "")), input_filtered_R1, input_filtered_R2))
     
   if not (args.pe) and BioBloomCategorizer == True:
-    os.system('{} --db {} --threads {} --report {}_kraken_report.txt --output {}_kraken_output.txt {}'.format(os.path.join(script_dir, "binaries/kraken2/kraken2"), os.path.join(script_dir, "db/kraken2_bacteria_db"), args.threads, prefix, args.inp[0].replace(".fastq.gz", ""), input_filtered_SE))
+    os.system('{} --db {} --threads {} --report {}_kraken_report.txt --output {}_kraken_output.txt {}'.format(os.path.join(script_dir, "binaries/kraken2/kraken2"), os.path.join(script_dir, "db/kraken2_bacteria_db"), args.threads, prefix, os.path.basename(args.inp[0].replace(".fastq.gz", "")), input_filtered_SE))
 
 def Bracken(prefix, tax_rank1, tax_rank2, read):
   os.system("{} -d {} -i {}_kraken_report.txt -o {}_{}.bracken -l {} -r {}".format(os.path.join(script_dir, "binaries/bracken"), os.path.join(script_dir, "db/kraken2_bacteria_db"), prefix, prefix, tax_rank2, tax_rank1, read))
@@ -101,12 +101,12 @@ if (args.tax_rank) is not None:
   Bracken(args.prefix, args.tax_rank, args.tax_rank, int(med))
   
 
-if os.path.exists(args.inp[0].replace(".fastq.gz", "") + "_kraken_output.txt"):
-  os.remove(args.inp[0].replace(".fastq.gz", "") + "_kraken_output.txt")
-if os.path.exists(args.inp[0].replace(".fastq.gz", "") + "_25000_reads.fastq"):
-  os.remove(args.inp[0].replace(".fastq.gz", "") + "_25000_reads.fastq")
-if os.path.exists(args.inp[1].replace(".fastq.gz", "") + "_25000_reads.fastq"):
-  os.remove(args.inp[1].replace(".fastq.gz", "") + "_25000_reads.fastq")  
+if os.path.exists(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_kraken_output.txt"):
+  os.remove(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_kraken_output.txt")
+if os.path.exists(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads.fastq"):
+  os.remove(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads.fastq")
+if os.path.exists(os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads.fastq"):
+  os.remove(os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads.fastq")  
 
 
   
