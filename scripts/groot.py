@@ -9,6 +9,8 @@ if (args.trimming) == True:
 if (args.screening) == True:
   from filtering import *
 
+#groot has to know the read length, so this has to be calculated in case the trimming option is turned off by the user.
+
 if (args.trimming) == False:
   lines = []
   lengte_reads = []

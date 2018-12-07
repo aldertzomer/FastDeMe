@@ -11,6 +11,8 @@ if (args.trimming) == True:
 
 print "Running Kaiju"
 
+#Running Kaiju definition
+
 def Kaiju(input_R1, input_R2, prefix, input_SE, input_filtered_R1, input_filtered_R2, input_filtered_SE):
   if (args.pe) and BioBloomCategorizer == False:
     os.system('{} -v -t {} -f {} -i {} -j {} -a mem -z {} -o {}_kaiju.txt'.format(os.path.join(script_dir, "binaries/kaiju"), os.path.join(script_dir, "db/DB_RefSeq_Virus/nodes.dmp"), os.path.join(script_dir, "db/DB_RefSeq_Virus/kaiju_db.fmi"), trimmed_R1, trimmed_R2, args.threads, os.path.basename(args.inp[0].replace(".fastq.gz", ""))))

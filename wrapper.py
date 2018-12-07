@@ -10,6 +10,8 @@ def cpu_threads(max_threads):
   else:
     return multiprocessing.cpu_count()
 
+#Arguments
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--pe", help="specify paired-end data, default is single end", \
 action="store_true", default=False, required=False)

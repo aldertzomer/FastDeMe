@@ -6,6 +6,8 @@ from Bio import SeqIO
 from __main__ import *
 if (args.trimming) == True:
   from QC import *
+  
+#BioBloomCategorizer definition
 
 def BioBloomCat(prefix, input_R1, input_R2, input_SE):
   if (args.pe) and float(identity) > 0.8 and int(hashes) > 10:
