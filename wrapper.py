@@ -37,6 +37,8 @@ if not (args.pe):
     print "please use one input file or use --pe for paired end files"
     sys.exit()
 
+output_dir = os.path.dirname(args.inp[0])
+
 noPrefix = False
 BioBloomCategorizer = False
 

@@ -12,7 +12,7 @@ if (args.trimming) == True:
 def BioBloomCat(prefix, input_R1, input_R2, input_SE):
   if (args.pe) and float(identity) > 0.8 and int(hashes) > 10:
     print "Contamination detected, running BioBloomCategorizer"
-    os.system('{} --fq -e -t {} -p {} -f {} {} {}'.format(os.path.join(script_dir, "binaries/biobloomcategorizer"), args.threads, prefix, species + ".bf", input_R1, input_R2))
+    os.system('{} --fq -e -t {} -p {} -f {} {} {}'.format(os.path.join(script_dir, "binaries/biobloomcategorizer"), args.threads, prefix, species + ".bf", os.path.join(output_dir, input_R1), os.path.join(output_dir, input_R2)))
     BioBloomCategorizer = True
     os.system('mv {} {}'.format(prefix + "_noMatch_1.", prefix + "_noMatch_1.fastq"))
     os.system('mv {} {}'.format(prefix + "_noMatch_2.", prefix + "_noMatch_2.fastq"))
@@ -24,7 +24,7 @@ def BioBloomCat(prefix, input_R1, input_R2, input_SE):
   
   if not (args.pe) and float(identity) > 0.8 and int(hashes) > 10:
     print "Contamination detected, running BioBloomCategorizer"
-    os.system('{} --fq -t {} -p {} -f {} {}'.format(os.path.join(script_dir, "binaries/biobloomcategorizer"), args.threads, prefix, species + ".bf", input_SE))
+    os.system('{} --fq -t {} -p {} -f {} {}'.format(os.path.join(script_dir, "binaries/biobloomcategorizer"), args.threads, prefix, species + ".bf", os.path.join(output_dir, input_SE)))
     BioBloomCategorizer = True
     print "Done"
     os.system('mv {} {}'.format(prefix + "_noMatch.", prefix + "_noMatch.fastq"))
@@ -39,10 +39,10 @@ print "Running mash screen"
 
 
 if (args.pe):
-  os.system('{} screen -w -p {} {} {} | sort -gr - | head > {}'.format(os.path.join(script_dir, "binaries/mash"), args.threads, os.path.join(script_dir, "db/mash_db/vertebrate.msh"), trimmed_R1, "screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.tab"))  
+  os.system('{} screen -w -p {} {} {} | sort -gr - | head > {}'.format(os.path.join(script_dir, "binaries/mash"), args.threads, os.path.join(script_dir, "db/mash_db/vertebrate.msh"), os.path.join(output_dir, trimmed_R1), "screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.tab"))  
     
 if not (args.pe):
-  os.system('{} screen -w -p {} {} {} | sort -gr - | head > {}'.format(os.path.join(script_dir, "binaries/mash"), args.threads, os.path.join(script_dir, "db/mash_db/vertebrate.msh"), trimmed_SE, "screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.tab"))
+  os.system('{} screen -w -p {} {} {} | sort -gr - | head > {}'.format(os.path.join(script_dir, "binaries/mash"), args.threads, os.path.join(script_dir, "db/mash_db/vertebrate.msh"), os.path.join(output_dir,trimmed_SE), "screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.tab"))
 
 
 
@@ -50,7 +50,7 @@ print "Done"
 
 if (args.pe):
   i = 1
-  with open("{}".format("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.tab"), 'r') as file_1:
+  with open("{}".format("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.tab", 'r')) as file_1:
     for row in csv.reader(file_1, delimiter='\t'):
       while i <= 1:
         identity = row[0]
@@ -61,7 +61,7 @@ if (args.pe):
 
 if not (args.pe):
   i = 1
-  with open("{}".format("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.tab"), 'r') as file_1:
+  with open("{}".format("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.tab", 'r')) as file_1:
     for row in csv.reader(file_1, delimiter='\t'):
       while i <= 1:
         identity = row[0]
@@ -77,7 +77,7 @@ if filter_exists == False:
   sys.exit()
 
 if noPrefix == True:
-  BioBloomCat(os.path.basename(args.inp[0].replace(".fastq.gz", "")), trimmed_R1, trimmed_R2, trimmed_SE)
+  BioBloomCat(args.prefix, trimmed_R1, trimmed_R2, trimmed_SE)
 
 
 if noPrefix == False:
@@ -103,8 +103,8 @@ if noPrefix == True:
     if os.path.exists(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_" + species + "."):
       os.remove(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_" + species + ".")
   
-  if os.path.exists(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_summary.tsv"):
-    os.remove(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_summary.tsv")
+  if os.path.exists(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", ""))) + "_summary.tsv"):
+    os.remove(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", ""))) + "_summary.tsv")
 
 if noPrefix == False:
 
@@ -124,8 +124,8 @@ if noPrefix == False:
     if os.path.exists(args.prefix + "_" + species + "."):
       os.remove(args.prefix + "_" + species + ".")
   
-  if os.path.exists(args.prefix + "_summary.tsv"):
-    os.remove(args.prefix + "_summary.tsv")
+  if os.path.exists(os.path.join(output_dir, args.prefix) + "_summary.tsv"):
+    os.remove(os.path.join(output_dir, args.prefix) + "_summary.tsv")
 
 if os.path.exists("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.tab"):
   os.remove("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.tab")
