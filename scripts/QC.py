@@ -182,7 +182,7 @@ if not (args.pe):
     name_output_trimmed = args.inp[0].replace(".fastq.gz", "") + "_25000_reads" + "_trimmed.fastq"
     write_reads(name_output_trimmed)
   if noPrefix == False:
-    extr_25000_reads(args.prefix + "_trimmed.fastq.gz")
+    extr_25000_reads(os.path.join(output_dir, args.prefix) + "_trimmed.fastq.gz")
     name_output_trimmed = args.inp[0].replace(".fastq.gz", "") + "_25000_reads" + "_trimmed.fastq"
     write_reads(name_output_trimmed)
 if (args.pe):
@@ -195,11 +195,11 @@ if (args.pe):
     name_output_trimmed1 = args.inp[1].replace(".fastq.gz", "") + "_25000_reads" + "_trimmed.fastq" 
     write_reads(name_output_trimmed1)
   if noPrefix == False:
-    extr_25000_reads(args.prefix + "_trimmed_1.fastq.gz")
+    extr_25000_reads(os.path.join(output_dir, args.prefix) + "_trimmed_1.fastq.gz")
     name_output_trimmed = args.inp[0].replace(".fastq.gz", "") + "_25000_reads" + "_trimmed.fastq"
     write_reads(name_output_trimmed)
     lines = []
-    extr_25000_reads(args.prefix + "_trimmed_2.fastq.gz")
+    extr_25000_reads(os.path.join(output_dir, args.prefix) + "_trimmed_2.fastq.gz")
     name_output_trimmed1 = args.inp[1].replace(".fastq.gz", "") + "_25000_reads" + "_trimmed.fastq" 
     write_reads(name_output_trimmed1)    
   

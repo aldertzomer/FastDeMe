@@ -47,19 +47,19 @@ if (args.trimming) == False:
 
 def groot(input_R1, input_R2, prefix, input_SE, input_filtered_R1, input_filtered_R2, input_filtered_SE):
   if (args.pe) and BioBloomCategorizer == False:
-    os.system('{} align -o {} -p {} -i {} -f {} {} | groot report -c 0.2 > {}_groot_report.txt'.format(os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, args.prefix + "_groot"), args.threads, os.path.join(script_dir, "db/groot-db-32/groot_index_{}".format(int(med))), os.path.join(output_dir, input_R1), os.path.join(output_dir, input_R2), os.path.join(output_dir, prefix)))
+    os.system('{} align -o {} -p {} -i {} -f {} {} | {} report -c 0.2 > {}_groot_report.txt'.format(os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, args.prefix + "_groot"), args.threads, os.path.join(script_dir, "db/groot-db-32/groot_index_{}".format(int(med))), os.path.join(output_dir, input_R1), os.path.join(output_dir, input_R2), os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, prefix)))
   
   
   if not (args.pe) and BioBloomCategorizer == False:
-    os.system('{} align -o {} -p {} -i {} -f {} | groot report -c 0.2 > {}_groot_report.txt'.format(os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, args.prefix + "_groot"), args.threads, os.path.join(script_dir, "db/groot-db-32/groot_index_{}".format(int(med))), os.path.join(output_dir, input_SE), os.path.join(output_dir, prefix)))
+    os.system('{} align -o {} -p {} -i {} -f {} | {} report -c 0.2 > {}_groot_report.txt'.format(os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, args.prefix + "_groot"), args.threads, os.path.join(script_dir, "db/groot-db-32/groot_index_{}".format(int(med))), os.path.join(output_dir, input_SE), os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, prefix)))
   
   
   if (args.pe) and BioBloomCategorizer == True:
-    os.system('{} align -o {} -p {} -i {} -f {} {} | groot report -c 0.2 > {}_groot_report.txt'.format(os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, args.prefix + "_groot"), args.threads, os.path.join(script_dir, "db/groot-db-32/groot_index_{}".format(int(med))), os.path.join(output_dir, input_filtered_R1), os.path.join(output_dir, input_filtered_R2), os.path.join(output_dir, prefix)))
+    os.system('{} align -o {} -p {} -i {} -f {} {} | {} report -c 0.2 > {}_groot_report.txt'.format(os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, args.prefix + "_groot"), args.threads, os.path.join(script_dir, "db/groot-db-32/groot_index_{}".format(int(med))), os.path.join(output_dir, input_filtered_R1), os.path.join(output_dir, input_filtered_R2), os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, prefix)))
   
   
   if not (args.pe) and BioBloomCategorizer == True:
-    os.system('{} align -o {} -p {} -i {} -f {} | groot report -c 0.2 > {}_groot_report.txt'.format(os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, args.prefix + "_groot"), args.threads, os.path.join(script_dir, "db/groot-db-32/groot_index_{}".format(int(med))), os.path.join(output_dir, input_filtered_SE), os.path.join(output_dir, prefix)))
+    os.system('{} align -o {} -p {} -i {} -f {} | {} report -c 0.2 > {}_groot_report.txt'.format(os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, args.prefix + "_groot"), args.threads, os.path.join(script_dir, "db/groot-db-32/groot_index_{}".format(int(med))), os.path.join(output_dir, input_filtered_SE), os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, prefix)))
   
 
 rem = med % 10
