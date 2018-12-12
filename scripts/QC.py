@@ -148,15 +148,15 @@ def fastp(input_SE, output_SE, input_R1, input_R2, output_R1, output_R2):
 
 if not (args.pe):
   extr_25000_reads(args.inp[0])
-  name_output = args.inp[0].replace(".fastq.gz", "") + "_25000_reads" + ".fastq"
+  name_output = os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads.fastq")
   write_reads(name_output)
 if (args.pe):
   extr_25000_reads(args.inp[0])
-  name_output = args.inp[0].replace(".fastq.gz", "") + "_25000_reads" + ".fastq"
+  name_output = os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads.fastq")
   write_reads(name_output)
   lines = []
   extr_25000_reads(args.inp[1])
-  name_output_1 = args.inp[1].replace(".fastq.gz", "") + "_25000_reads" + ".fastq"
+  name_output_1 = os.path.join(output_dir, os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads.fastq")
   write_reads(name_output_1)
 
 
@@ -178,29 +178,29 @@ print "Done"
 
 if not (args.pe):
   if noPrefix == True:
-    extr_25000_reads(args.inp[0].replace(".fastq.gz", "") + "_trimmed.fastq.gz")
-    name_output_trimmed = args.inp[0].replace(".fastq.gz", "") + "_25000_reads" + "_trimmed.fastq"
+    extr_25000_reads(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", ""))) + "_trimmed.fastq.gz")
+    name_output_trimmed = os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads" + "_trimmed.fastq")
     write_reads(name_output_trimmed)
   if noPrefix == False:
     extr_25000_reads(os.path.join(output_dir, args.prefix) + "_trimmed.fastq.gz")
-    name_output_trimmed = args.inp[0].replace(".fastq.gz", "") + "_25000_reads" + "_trimmed.fastq"
+    name_output_trimmed = os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads" + "_trimmed.fastq")
     write_reads(name_output_trimmed)
 if (args.pe):
   if noPrefix == True:
-    extr_25000_reads(args.inp[0].replace(".fastq.gz", "") + "_trimmed_1.fastq.gz")
-    name_output_trimmed = args.inp[0].replace(".fastq.gz", "") + "_25000_reads" + "_trimmed.fastq"
+    extr_25000_reads(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", ""))) + "_trimmed_1.fastq.gz")
+    name_output_trimmed = os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads" + "_trimmed.fastq")
     write_reads(name_output_trimmed)
     lines = []
-    extr_25000_reads(args.inp[1].replace(".fastq.gz", "") + "_trimmed_2.fastq.gz")
-    name_output_trimmed1 = args.inp[1].replace(".fastq.gz", "") + "_25000_reads" + "_trimmed.fastq" 
+    extr_25000_reads(os.path.join(output_dir, os.path.basename(args.inp[1].replace(".fastq.gz", ""))) + "_trimmed_2.fastq.gz")
+    name_output_trimmed1 = os.path.join(output_dir, os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads" + "_trimmed.fastq")
     write_reads(name_output_trimmed1)
   if noPrefix == False:
     extr_25000_reads(os.path.join(output_dir, args.prefix) + "_trimmed_1.fastq.gz")
-    name_output_trimmed = args.inp[0].replace(".fastq.gz", "") + "_25000_reads" + "_trimmed.fastq"
+    name_output_trimmed = os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads" + "_trimmed.fastq")
     write_reads(name_output_trimmed)
     lines = []
     extr_25000_reads(os.path.join(output_dir, args.prefix) + "_trimmed_2.fastq.gz")
-    name_output_trimmed1 = args.inp[1].replace(".fastq.gz", "") + "_25000_reads" + "_trimmed.fastq" 
+    name_output_trimmed1 = os.path.join(output_dir, os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads" + "_trimmed.fastq")
     write_reads(name_output_trimmed1)    
   
 
@@ -238,23 +238,23 @@ if (args.pe):
 
 #Deleting the intermediate 25000 reads files    
 if not (args.pe):
-  if os.path.exists(args.inp[0].replace(".fastq.gz", "") + "_25000_reads.fastq"):
-    os.remove(args.inp[0].replace(".fastq.gz", "") + "_25000_reads.fastq")
-  if os.path.exists(args.inp[0].replace(".fastq.gz", "") + "_25000_reads_trimmed.fastq"):
-    os.remove(args.inp[0].replace(".fastq.gz", "") + "_25000_reads_trimmed.fastq") 
+  if os.path.exists(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads.fastq")):
+    os.remove(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads.fastq"))
+  if os.path.exists(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads_trimmed.fastq")):
+    os.remove(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads_trimmed.fastq"))
   if os.path.exists("fastp.html"):
     os.remove("fastp.html")
   if os.path.exists(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimming_report.json"):
     os.remove(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimming_report.json")
 if (args.pe):
-  if os.path.exists(args.inp[0].replace(".fastq.gz", "") + "_25000_reads.fastq"):
-    os.remove(args.inp[0].replace(".fastq.gz", "") + "_25000_reads.fastq")
-  if os.path.exists(args.inp[0].replace(".fastq.gz", "") + "_25000_reads_trimmed.fastq"):
-    os.remove(args.inp[0].replace(".fastq.gz", "") + "_25000_reads_trimmed.fastq") 
-  if os.path.exists(args.inp[1].replace(".fastq.gz", "") + "_25000_reads.fastq"):
-    os.remove(args.inp[1].replace(".fastq.gz", "") + "_25000_reads.fastq")  
-  if os.path.exists(args.inp[1].replace(".fastq.gz", "") + "_25000_reads_trimmed.fastq"):
-    os.remove(args.inp[1].replace(".fastq.gz", "") + "_25000_reads_trimmed.fastq")
+  if os.path.exists(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads.fastq")):
+    os.remove(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads.fastq"))
+  if os.path.exists(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads_trimmed.fastq")):
+    os.remove(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads_trimmed.fastq")) 
+  if os.path.exists(os.path.join(output_dir, os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads.fastq")):
+    os.remove(os.path.join(output_dir, os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads.fastq"))  
+  if os.path.exists(os.path.join(output_dir, os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads_trimmed.fastq")):
+    os.remove(os.path.join(output_dir, os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads_trimmed.fastq"))
   if os.path.exists("fastp.html"):
     os.remove("fastp.html")
   if os.path.exists(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimming_report.json"):

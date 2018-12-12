@@ -13,7 +13,10 @@ Update 11-12-2018
 Fixed an issue were the wrong input file would be chosen for Kaiju, Kraken2 and GROOT
 Fixed an issue were GROOT wouldn't start on all PCs
 
+Update 12-12-2018
+Fixed a crash of the program when not using a prefix
+Fixed an issue were not all unnecessary would be deleted after program finishes
+
 To do:
-Not all uncessary files are correctly deleted at the end when the program finishes
-When not using a prefix the program will crash
+Program crashes when trimming is turned off
 

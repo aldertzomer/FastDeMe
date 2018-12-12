@@ -51,7 +51,7 @@ noPrefix = False
 
 
 if args.prefix is None:
-  args.prefix = args.inp[0].replace('.fastq.gz', '')  
+  args.prefix = os.path.join(output_dir, os.path.basename(args.inp[0].replace('.fastq.gz', '')))
   noPrefix = True
 
   
@@ -105,7 +105,7 @@ if (args.trimming) == False and (args.screening) == False:
   trimmed_R2 = os.path.basename(args.inp[1]) 
 
 if (args.screening) == False:
-  BioBloomCategorizer == False
+  BioBloomCategorizer = False
  
 script_location = os.path.dirname(sys.argv[0])
 script_dir = os.path.abspath(script_location) 

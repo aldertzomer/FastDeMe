@@ -87,4 +87,7 @@ print "Done"
 if os.path.exists(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads.fastq"):
   os.remove(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads.fastq")
 if os.path.exists(os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads.fastq"):
-  os.remove(os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads.fastq")  
+  os.remove(os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads.fastq") 
+if os.path.exists(os.path.join(script_dir, "groot.log")):
+  os.remove(os.path.join(script_dir, "groot.log"))   
+ 
