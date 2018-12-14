@@ -66,6 +66,53 @@ Species in standard database|GCF ID
 
 Bloom filters for the remaining species in vertebrate_mammalian and vertebrate_other can be downloaded separately. In cases were the contaminating factor is not known in advance, the program will output the GCF ID of the missing species so it can be downloaded and included by the user. This download consist of a folder containing a `.bf` and `.txt` file. The folder should be put in either `db/mash_db/vertebrate/refseq/vertebrate_mammalian` or `db/mash_db/vertebrate/refseq/vertebrate_other` depending on the species.
 
+## Output
+
+## Options
+`usage: wrapper.py --inp file.fastq.gz --output /path/to/output/folder/ [OPTIONS]
+
+  -h, --help           show this help message and exit
+  --pe                 specify paired-end data, default is single end
+  --inp INP [INP ...]  input files in fastq.gz format, if paired-end input
+                       both files with a space between them
+  --threads THREADS    specify number of threads to be used, default is max
+                       available threads up to 16 threads
+  --kaiju              use kaiju for taxonomic identification
+  --kraken             use kraken2 for taxonomic identification
+  --groot              use groot for resistome analysis
+  --tax_rank TAX_RANK  set taxonomic rank for output. choose one: phylum,
+                       class, order, family, genus, species, default is all
+                       ranks.
+  --prefix PREFIX      prefix for all output files, default is name of input
+                       file(s)
+  --trimming           turn off trimming with fastp
+  --screening          turn off host contamination screening with mash and
+                       BioBloomCategorizer
+  --output OUTPUT      set output directory`
+
+## License
+
+## Acknowledgments
+
+### fastp
+fastp: an ultra-fast all-in-one FASTQ preprocessor. Shifu Chen, Yanqing Zhou, Yaru Chen, Jia Gu. Bioinformatics, Volume 34, Issue 17, 1 September 2018, Pages i884–i890, [paper](https://doi.org/10.1093/bioinformatics/bty560)
+
+[GitHub](https://github.com/OpenGene/fastp)
+
+### mash
+Mash: fast genome and metagenome distance estimation using MinHash. Ondov BD, Treangen TJ, Melsted P, Mallonee AB, Bergman NH, Koren S, Phillippy AM. Genome Biol. 2016 Jun 20;17(1):132. [paper](https://doi.org/10.1186/s13059-016-0997-x)
+
+[GitHub](https://github.com/marbl/Mash)
+
+### BioBloom Tools
+BioBloom tools: fast, accurate and memory-efficient host species sequence screening using bloom filters.
+Justin Chu, Sara Sadeghi, Anthony Raymond, Shaun D. Jackman, Ka Ming Nip, Richard Mar, Hamid Mohamadi, Yaron S. Butterfield, A. Gordon Robertson, Inanç Birol. Bioinformatics 2014; 30 (23): 3402-3404. [paper](https://doi.org/10.1093/bioinformatics/btu558)
+
+[GitHub](https://github.com/bcgsc/biobloom)
+
+### Kraken2
+
+
 Update 6-12-2018:
 Fixed a crash when inputting files with their filepath (/path/to/file/example.fastq)
 Fixed an issue were some files would be put in program folder instead of input file folder
