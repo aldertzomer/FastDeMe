@@ -70,38 +70,28 @@ Bloom filters for the remaining species in vertebrate_mammalian and vertebrate_o
 
 
 ## Options
-`usage: wrapper.py --inp file.fastq.gz --output /path/to/output/folder/ [OPTIONS]
+```
+usage: wrapper.py --inp file.fastq.gz --output /path/to/output/folder/ [OPTIONS]
 
-  -h, --help           show this help message and exit
-  
-  --pe                 specify paired-end data, default is single end
-  
+  -h, --help           show this help message and exit  
+  --pe                 specify paired-end data, default is single end  
   --inp INP [INP ...]  input files in fastq.gz format, if paired-end input  
-                       both files with a space between them
-                       
+                       both files with a space between them                       
   --threads THREADS    specify number of threads to be used, default is max
-                       available threads up to 16 threads
-                       
-  --kaiju              use kaiju for taxonomic identification
-  
-  --kraken             use kraken2 for taxonomic identification
-  
-  --groot              use groot for resistome analysis
-  
+                       available threads up to 16 threads                       
+  --kaiju              use kaiju for taxonomic identification  
+  --kraken             use kraken2 for taxonomic identification  
+  --groot              use groot for resistome analysis  
   --tax_rank TAX_RANK  set taxonomic rank for output. choose one: phylum,
                        class, order, family, genus, species, default is all
-                       ranks.
-                       
+                       ranks.                       
   --prefix PREFIX      prefix for all output files, default is name of input
-                       file(s)
-                       
-  --trimming           turn off trimming with fastp
-  
+                       file(s)                       
+  --trimming           turn off trimming with fastp  
   --screening          turn off host contamination screening with mash and
-                       BioBloomCategorizer
-                       
-  --output OUTPUT      set output directory`
-
+                       BioBloomCategorizer                       
+  --output OUTPUT      set output directory
+```
 ## License
 
 ## Acknowledgments
