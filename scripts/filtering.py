@@ -45,7 +45,7 @@ if (args.pe):
   os.system('{} screen -w -p {} {} {} | sort -gr - | head > {}'.format(os.path.join(script_dir, "binaries/mash"), args.threads, os.path.join(script_dir, "db/mash_db/vertebrate.msh"), os.path.join(output_dir, trimmed_R1), "screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.tab"))  
     
 if not (args.pe):
-  os.system('{} screen -w -p {} {} {} | sort -gr - | head > {}'.format(os.path.join(script_dir, "binaries/mash"), args.threads, os.path.join(script_dir, "db/mash_db/vertebrate.msh"), os.path.join(output_dir,trimmed_SE), "screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.tab"))
+  os.system('{} screen -w -p {} {} {} | sort -gr - | head > {}'.format(os.path.join(script_dir, "binaries/mash"), args.threads, os.path.join(script_dir, "db/mash_db/vertebrate.msh"), os.path.join(output_dir, trimmed_SE), "screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.tab"))
 
 
 

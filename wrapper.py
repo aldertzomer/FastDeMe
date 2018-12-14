@@ -80,6 +80,8 @@ if noPrefix == False:
 
 if (args.trimming) == False and (args.screening) == True:
   if noPrefix == True:
+    os.symlink(args.inp[0], os.path.join(output_dir, os.path.basename(args.inp[0])))
+    os.symlink(args.inp[1], os.path.join(output_dir, os.path.basename(args.inp[1])))
       
     filtered_R1 = os.path.basename(args.inp[0].replace(".fastq.gz", "") + "_noMatch_1.fastq")  
     filtered_R2 = os.path.basename(args.inp[0].replace(".fastq.gz", "") + "_noMatch_2.fastq")     
@@ -100,10 +102,13 @@ if (args.trimming) == False and (args.screening) == True:
     trimmed_R2 = os.path.basename(args.inp[1])
 
 if (args.trimming) == False and (args.screening) == False:
+  os.symlink(args.inp[0], os.path.join(output_dir, os.path.basename(args.inp[0])))
+  os.symlink(args.inp[1], os.path.join(output_dir, os.path.basename(args.inp[1])))  
+  
   trimmed_SE = os.path.basename(args.inp[0])
   trimmed_R1 = os.path.basename(args.inp[0])
-  trimmed_R2 = os.path.basename(args.inp[1]) 
-
+  trimmed_R2 = os.path.basename(args.inp[1])
+  
 if (args.screening) == False:
   BioBloomCategorizer = False
  
