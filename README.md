@@ -34,9 +34,9 @@ The GROOT database consist of a mixture of the ResFinder, ARG-ANNOT and CARD dat
 
 The Kaiju database was made with assembled and annotated bacterial, archaeal and viral reference genomes from the NCBI RefSeq database.
 
-### Kraken
+### Kraken2
 
-The Kraken database was made with the complete bacterial/archaeal reference genomes from RefSeq.
+The Kraken2 database was made with the complete bacterial/archaeal reference genomes from RefSeq.
 
 ### Mash/BioBloomCategorizer
 
@@ -68,6 +68,8 @@ Bloom filters for the remaining species in vertebrate_mammalian and vertebrate_o
 
 ## Output
 
+
+
 ## Options
 `usage: wrapper.py --inp file.fastq.gz --output /path/to/output/folder/ [OPTIONS]
 
@@ -95,7 +97,7 @@ Bloom filters for the remaining species in vertebrate_mammalian and vertebrate_o
 ## Acknowledgments
 
 ### fastp
-fastp: an ultra-fast all-in-one FASTQ preprocessor. Shifu Chen, Yanqing Zhou, Yaru Chen, Jia Gu. Bioinformatics, Volume 34, Issue 17, 1 September 2018, Pages i884–i890, [paper](https://doi.org/10.1093/bioinformatics/bty560)
+Shifu Chen, Yanqing Zhou, Yaru Chen, Jia Gu; fastp: an ultra-fast all-in-one FASTQ preprocessor,  Bioinformatics, Volume 34, Issue 17, 1 September 2018, Pages i884–i890, [paper](https://doi.org/10.1093/bioinformatics/bty560)
 
 [GitHub](https://github.com/OpenGene/fastp)
 
@@ -111,24 +113,23 @@ Justin Chu, Sara Sadeghi, Anthony Raymond, Shaun D. Jackman, Ka Ming Nip, Richar
 [GitHub](https://github.com/bcgsc/biobloom)
 
 ### Kraken2
+Wood DE, Salzberg SL: Kraken: ultrafast metagenomic sequence classification using exact alignments. Genome Biology 2014, 15:R46. [paper](https://doi.org/10.1186/gb-2014-15-3-r46) 
 
+[GitHub](https://github.com/DerrickWood/kraken2)
 
-Update 6-12-2018:
-Fixed a crash when inputting files with their filepath (/path/to/file/example.fastq)
-Fixed an issue were some files would be put in program folder instead of input file folder
-All files now are put in the folder where the input files are located
+### Bracken
+Lu J, Breitwieser FP, Thielen P, Salzberg SL. 2017. Bracken: estimating species abundance in metagenomics data. PeerJ Computer Science 3:e104 [paper](https://doi.org/10.7717/peerj-cs.104)
 
-Update 10-12-2018:
-User can now choose own destination folder (mandatory)
+[GitHub](https://github.com/jenniferlu717/Bracken)
 
-Update 11-12-2018
-Fixed an issue were the wrong input file would be chosen for Kaiju, Kraken2 and GROOT
-Fixed an issue were GROOT wouldn't start on all PCs
+### Kaiju
+Menzel, P. et al. (2016) Fast and sensitive taxonomic classification for metagenomics with Kaiju. Nat. Commun. 7:11257 [paper](https://doi.org/10.1038/ncomms11257)
 
-Update 12-12-2018
-Fixed a crash of the program when not using a prefix
-Fixed an issue were not all unnecessary would be deleted after program finishes
+[GitHub](https://github.com/bioinformatics-centre/kaiju)
 
-To do:
-Program crashes when trimming is turned off
+### GROOT
+Will P M Rowe, Martyn D Winn; Indexed variation graphs for efficient and accurate resistome profiling, Bioinformatics, Volume 34, Issue 21, 1 November 2018, Pages 3601–3608, [paper](https://doi.org/10.1093/bioinformatics/bty387)
+
+[GitHub](https://github.com/will-rowe/groot)
+
 
