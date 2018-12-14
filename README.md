@@ -36,11 +36,11 @@ The Kaiju database was made with assembled and annotated bacterial, archaeal and
 
 ### Kraken2
 
-The Kraken2 database was made with the complete bacterial/archaeal reference genomes from RefSeq.
+The Kraken2 database was made with the complete bacterial/archaeal reference genomes from the NCBI RefSeq database.
 
 ### Mash/BioBloomCategorizer
 
-The Mash database was made from the complete vertebrate_mammalian and vertebrate_other databases. Since the bloom filters BioBloomCategorizer uses for filtering the host reads are quite large, only filters for common host species are included in the standard database to reduce download size.
+The Mash database was made from the complete vertebrate_mammalian and vertebrate_other databases from NCBI RefSeq. Since the bloom filters BioBloomCategorizer uses for filtering the host reads are quite large, only filters for common host species are included in the standard database to reduce download size.
 
 Species in standard database|GCF ID
 --------------|----------------
