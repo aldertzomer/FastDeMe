@@ -69,39 +69,49 @@ Bloom filters for the remaining species in vertebrate_mammalian and vertebrate_o
 ## Output
 
 
-
 ## Options
 `usage: wrapper.py --inp file.fastq.gz --output /path/to/output/folder/ [OPTIONS]
 
   -h, --help           show this help message and exit
+  
   --pe                 specify paired-end data, default is single end
-  --inp INP [INP ...]  input files in fastq.gz format, if paired-end input
+  
+  --inp INP [INP ...]  input files in fastq.gz format, if paired-end input  
                        both files with a space between them
+                       
   --threads THREADS    specify number of threads to be used, default is max
                        available threads up to 16 threads
+                       
   --kaiju              use kaiju for taxonomic identification
+  
   --kraken             use kraken2 for taxonomic identification
+  
   --groot              use groot for resistome analysis
+  
   --tax_rank TAX_RANK  set taxonomic rank for output. choose one: phylum,
                        class, order, family, genus, species, default is all
                        ranks.
+                       
   --prefix PREFIX      prefix for all output files, default is name of input
                        file(s)
+                       
   --trimming           turn off trimming with fastp
+  
   --screening          turn off host contamination screening with mash and
                        BioBloomCategorizer
+                       
   --output OUTPUT      set output directory`
 
 ## License
 
 ## Acknowledgments
 
-### fastp
+### Fastp
 Shifu Chen, Yanqing Zhou, Yaru Chen, Jia Gu; fastp: an ultra-fast all-in-one FASTQ preprocessor,  Bioinformatics, Volume 34, Issue 17, 1 September 2018, Pages i884–i890, [paper](https://doi.org/10.1093/bioinformatics/bty560)
 
 [GitHub](https://github.com/OpenGene/fastp)
 
-### mash
+### Mash
 Mash: fast genome and metagenome distance estimation using MinHash. Ondov BD, Treangen TJ, Melsted P, Mallonee AB, Bergman NH, Koren S, Phillippy AM. Genome Biol. 2016 Jun 20;17(1):132. [paper](https://doi.org/10.1186/s13059-016-0997-x)
 
 [GitHub](https://github.com/marbl/Mash)
