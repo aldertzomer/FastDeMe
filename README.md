@@ -67,6 +67,26 @@ Species in standard database|GCF ID
 Bloom filters for the remaining species in vertebrate_mammalian and vertebrate_other can be downloaded separately. In cases were the contaminating factor is not known in advance, the program will output the GCF ID of the missing species so it can be downloaded and included by the user. This download consist of a folder containing a `.bf` and `.txt` file. The folder should be put in either `db/mash_db/vertebrate/refseq/vertebrate_mammalian` or `db/mash_db/vertebrate/refseq/vertebrate_other` depending on the species.
 
 ## Output
+Output obviously depends on what modules are used for analysis. The following files are expected as output for each module:
+
+### Trimming
+For paired end:
+`<prefix>_trimmed_1.fastq.gz`
+`<prefix>_trimmed_2.fastq.gz`
+For single end:
+`<prefix>_trimmed.fastq.gz`
+
+### Screening
+For paired end:
+`<prefix>_noMatch_1.fastq`
+`<prefix>_noMatch_2.fastq`
+For single end:
+`<prefix>_noMatch.fastq`
+
+These files are the same as the trimmed files, but with host contamination removed.
+
+### Kaiju
+
 
 
 ## Options
