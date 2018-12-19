@@ -14,24 +14,19 @@ def BioBloomCat(prefix, input_R1, input_R2, input_SE):
   if (args.pe) and float(identity) > 0.8 and int(hashes) > 10:
     print "Contamination detected, running BioBloomCategorizer"
     os.system('{} --fq -e -t {} -p {} -f {} {} {}'.format(os.path.join(script_dir, "binaries/biobloomcategorizer"), args.threads, prefix, species + ".bf", os.path.join(output_dir, input_R1), os.path.join(output_dir, input_R2)))
-    global BioBloomCategorizer
     BioBloomCategorizer = True
     os.system('mv {} {}'.format(prefix + "_noMatch_1.", prefix + "_noMatch_1.fastq"))
     os.system('mv {} {}'.format(prefix + "_noMatch_2.", prefix + "_noMatch_2.fastq"))
     print "Done"
-  elif (args.pe) and float(identity) < 0.8 or int(hashes) < 10: 
-    print "No contamination detected"
-  
-  
+   
   
   if not (args.pe) and float(identity) > 0.8 and int(hashes) > 10:
     print "Contamination detected, running BioBloomCategorizer"
     os.system('{} --fq -t {} -p {} -f {} {}'.format(os.path.join(script_dir, "binaries/biobloomcategorizer"), args.threads, prefix, species + ".bf", os.path.join(output_dir, input_SE)))
-    global BioBloomCategorizer
     BioBloomCategorizer = True
     print "Done"
     os.system('mv {} {}'.format(prefix + "_noMatch.", prefix + "_noMatch.fastq"))
-  elif not (args.pe) and float(identity) < 0.8 or int(hashes) < 10:
+  if float(identity) < 0.8 and int(hashes) < 10:
     print "No contamination detected"
   
   if float(identity) < 0.8 and int(hashes) > 50:
@@ -75,10 +70,11 @@ if not (args.pe):
 
 
 filter_exists = os.path.isfile(species + ".bf")
-if filter_exists == False:
-  print "filter not included in standard BioBloomCategorizer database, please download {} or turn off filtering"
+if float(identity) > 0.8 and int(hashes) > 10 and filter_exists == False:
+  print "filter not included in standard BioBloomCategorizer database, please download {} or turn off filtering".format(os.path.basename(species))
   sys.exit()
-  
+
+global BioBloomCategorizer  
 BioBloomCategorizer = False
 
 if noPrefix == True:
@@ -96,20 +92,15 @@ if noPrefix == True:
       os.remove(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_multiMatch_1."))
     if os.path.exists(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_multiMatch_2.")):
       os.remove(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_multiMatch_2."))
-    if os.path.exists(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_" + os.path.basename(species) + "_1.")):
-      os.remove(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_" + os.path.basename(species) + "_1."))
-    if os.path.exists(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_" + os.path.basename(species) + "_2.")):
-      os.remove(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_" + os.path.basename(species) + "_2."))
+
   
-  if not (args.pe) and BioBloomCategorizer == True:
-    if os.path.exists(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_multiMatch.")):
-      os.remove(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_multiMatch."))  
-    if os.path.exists(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_" + os.path.basename(species) + ".")):
-      os.remove(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_" + os.path.basename(species) + "."))
+  
+  if os.path.exists(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_multiMatch.")):
+    os.remove(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_multiMatch."))  
+
   
   if os.path.exists(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", ""))) + "_summary.tsv"):
     os.remove(os.path.join(output_dir, os.path.basename(args.inp[0].replace(".fastq.gz", ""))) + "_summary.tsv")
-
 
 
 if noPrefix == False:
@@ -119,16 +110,12 @@ if noPrefix == False:
       os.remove(os.path.join(output_dir, args.prefix + "_multiMatch_1."))
     if os.path.exists(os.path.join(output_dir, args.prefix + "_multiMatch_2.")):
       os.remove(os.path.join(output_dir, args.prefix + "_multiMatch_2."))
-    if os.path.exists(os.path.join(output_dir, args.prefix + "_" + os.path.basename(species) + "_1.")):
-      os.remove(os.path.join(output_dir, args.prefix + "_" + os.path.basename(species) + "_1."))
-    if os.path.exists(os.path.join(output_dir, args.prefix + "_" + os.path.basename(species) + "_2.")):
-      os.remove(os.path.join(output_dir, args.prefix + "_" + os.path.basename(species) + "_2."))
+
   
-  if not (args.pe) and BioBloomCategorizer == True:
-    if os.path.exists(os.path.join(output_dir, args.prefix + "_multiMatch.")):
-      os.remove(os.path.join(output_dir, args.prefix + "_multiMatch."))
-    if os.path.exists(os.path.join(output_dir, args.prefix + "_" + os.path.basename(species) + ".")):
-      os.remove(os.path.join(output_dir, args.prefix + "_" + os.path.basename(species) + "."))
+
+  if os.path.exists(os.path.join(output_dir, args.prefix + "_multiMatch.")):
+    os.remove(os.path.join(output_dir, args.prefix + "_multiMatch."))
+
   
   if os.path.exists(os.path.join(output_dir, args.prefix) + "_summary.tsv"):
     os.remove(os.path.join(output_dir, args.prefix) + "_summary.tsv")
@@ -139,8 +126,7 @@ if os.path.exists("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", 
 if os.path.exists("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.tab"):
   os.remove("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.tab")
       
-       
-
+"/mnt/data/klif/svermeulen/Scripts_test/test_map/Kip/lmao/test_R1_small_multiMatch."
     
      
      

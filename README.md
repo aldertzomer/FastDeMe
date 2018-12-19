@@ -17,6 +17,7 @@ Update 12-12-2018
 Fixed a crash of the program when not using a prefix
 Fixed an issue were not all unnecessary would be deleted after program finishes
 
-To do:
-Program crashes when trimming is turned off
+Update 13-12-2018
+Program no longer crashes when trimming is turned off.
+
 

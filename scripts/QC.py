@@ -128,19 +128,21 @@ def write_trimming_report_PE(file_name):
     f.write(total_bases_filtered_2.replace('"', "").replace(",", "").replace("_", " ") + "\n")
 
 #Running fastp definition
+if not (args.pe):
+  def fastp_se(input_SE, output_SE):
+    if not (args.pe) and (args.threads) <= 16:
+      os.system('{} --thread {} -i {} -o {} -l {} -j {} -q 20 >/dev/null 2>/dev/null'.format(os.path.join(script_dir, "binaries/fastp"), args.threads, input_SE, os.path.join(output_dir, output_SE), iround(med*0.8), os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimming_report.json"))
+      
+    if not (args.pe) and (args.threads) > 16:
+      os.system('{} --thread {} -i {} -o {} -l {} -j {} -q 20 >/dev/null 2>/dev/null'.format(os.path.join(script_dir, "binaries/fastp"), int(16), input_SE, os.path.join(output_dir, output_SE), iround(med*0.8), os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimming_report.json"))
 
-def fastp(input_SE, output_SE, input_R1, input_R2, output_R1, output_R2):
-  if not (args.pe) and (args.threads) <= 16:
-    os.system('{} --thread {} -i {} -o {} -l {} -j {} -q 20 >/dev/null 2>/dev/null'.format(os.path.join(script_dir, "binaries/fastp"), args.threads, input_SE, os.path.join(output_dir, output_SE), iround(med*0.8), os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimming_report.json"))
+if (args.pe):
+  def fastp_pe(input_R1, input_R2, output_R1, output_R2):    
+    if (args.pe) and (args.threads) <= 16:
+      os.system('{} --thread {} -i {} -I {} -o {} -O {} -l {} -j {} -q 20 >/dev/null 2>/dev/null'.format(os.path.join(script_dir, "binaries/fastp"), args.threads, input_R1, input_R2, os.path.join(output_dir, output_R1), os.path.join(output_dir, output_R2), iround(med*0.8), os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimming_report.json"))
     
-  if not (args.pe) and (args.threads) > 16:
-    os.system('{} --thread {} -i {} -o {} -l {} -j {} -q 20 >/dev/null 2>/dev/null'.format(os.path.join(script_dir, "binaries/fastp"), int(16), input_SE, os.path.join(output_dir, output_SE), iround(med*0.8), os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimming_report.json"))
-  
-  if (args.pe) and (args.threads) <= 16:
-    os.system('{} --thread {} -i {} -I {} -o {} -O {} -l {} -j {} -q 20 >/dev/null 2>/dev/null'.format(os.path.join(script_dir, "binaries/fastp"), args.threads, input_R1, input_R2, os.path.join(output_dir, output_R1), os.path.join(output_dir, output_R2), iround(med*0.8), os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimming_report.json"))
-  
-  if (args.pe) and (args.threads) > 16:
-    os.system('{} --thread {} -i {} -I {} -o {} -O {} -l {} -j {} -q 20 >/dev/null 2>/dev/null'.format(os.path.join(script_dir, "binaries/fastp"), int(16), input_R1, input_R2, os.path.join(output_dir, output_R1), os.path.join(output_dir, output_R2), iround(med*0.8), os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimming_report.json"))
+    if (args.pe) and (args.threads) > 16:
+      os.system('{} --thread {} -i {} -I {} -o {} -O {} -l {} -j {} -q 20 >/dev/null 2>/dev/null'.format(os.path.join(script_dir, "binaries/fastp"), int(16), input_R1, input_R2, os.path.join(output_dir, output_R1), os.path.join(output_dir, output_R2), iround(med*0.8), os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimming_report.json"))
   
 
 
@@ -166,7 +168,10 @@ for seq_record in SeqIO.parse(name_output, "fastq"):
   lengte_reads.append(int((len(seq_record))))
 med = median(lengte_reads)
 
-fastp(args.inp[0], trimmed_SE, args.inp[0], args.inp[1], trimmed_R1, trimmed_R2)
+if not (args.pe):
+  fastp_se(args.inp[0], trimmed_SE)
+if (args.pe):
+  fastp_pe(args.inp[0], args.inp[1], trimmed_R1, trimmed_R2)
 
 lines = []
 lengte_reads = []

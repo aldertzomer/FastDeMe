@@ -22,8 +22,8 @@ parser.add_argument("--kraken", help="use kraken2 for taxonomic identification",
 parser.add_argument("--groot", help="use groot for resistome analysis", action="store_true", default=False)
 parser.add_argument("--tax_rank", help="set taxonomic rank for output. choose one: phylum, class, order, family, genus, species, default is all ranks.", action="store")
 parser.add_argument("--prefix", help="prefix for all output files, default is name of input file(s)", action="store")
-parser.add_argument("--trimming", help="turn off trimming with fastp", action="store_false", default=True)
-parser.add_argument("--screening", help="turn off host contamination screening with mash and BioBloomCategorizer", action="store_false", default=True)
+parser.add_argument("--trimming", help="turn on trimming with fastp", action="store_true", default=False)
+parser.add_argument("--screening", help="turn on host contamination screening with mash and BioBloomCategorizer", action="store_true", default=False)
 parser.add_argument ("--output", help="set output directory", action="store", required=True)
 args = parser.parse_args()
 
@@ -63,7 +63,9 @@ if noPrefix == True:
   
   trimmed_SE = os.path.basename(args.inp[0].replace(".fastq.gz", "") + "_trimmed.fastq.gz")  
   trimmed_R1 = os.path.basename(args.inp[0].replace(".fastq.gz", "") + "_trimmed_1.fastq.gz")
-  trimmed_R2 = os.path.basename(args.inp[1].replace(".fastq.gz", "") + "_trimmed_2.fastq.gz")
+  trimmed_R2 = ''
+  if (args.pe):
+    trimmed_R2 = os.path.basename(args.inp[1].replace(".fastq.gz", "") + "_trimmed_2.fastq.gz")
   
  
 if noPrefix == False:  
@@ -81,7 +83,8 @@ if noPrefix == False:
 if (args.trimming) == False and (args.screening) == True:
   if noPrefix == True:
     os.symlink(args.inp[0], os.path.join(output_dir, os.path.basename(args.inp[0])))
-    os.symlink(args.inp[1], os.path.join(output_dir, os.path.basename(args.inp[1])))
+    if (args.pe):
+      os.symlink(args.inp[1], os.path.join(output_dir, os.path.basename(args.inp[1])))
       
     filtered_R1 = os.path.basename(args.inp[0].replace(".fastq.gz", "") + "_noMatch_1.fastq")  
     filtered_R2 = os.path.basename(args.inp[0].replace(".fastq.gz", "") + "_noMatch_2.fastq")     
@@ -89,7 +92,9 @@ if (args.trimming) == False and (args.screening) == True:
     
     trimmed_SE = os.path.basename(args.inp[0])
     trimmed_R1 = os.path.basename(args.inp[0])
-    trimmed_R2 = os.path.basename(args.inp[1])
+    trimmed_R2 = ''
+    if (args.pe):
+      trimmed_R2 = os.path.basename(args.inp[1])
    
   if noPrefix == False:  
     
@@ -99,18 +104,24 @@ if (args.trimming) == False and (args.screening) == True:
   
     trimmed_SE = os.path.basename(args.inp[0])
     trimmed_R1 = os.path.basename(args.inp[0])
-    trimmed_R2 = os.path.basename(args.inp[1])
+    trimmed_R2 = ''
+    if (args.pe):
+      trimmed_R2 = os.path.basename(args.inp[1])
 
 if (args.trimming) == False and (args.screening) == False:
   os.symlink(args.inp[0], os.path.join(output_dir, os.path.basename(args.inp[0])))
-  os.symlink(args.inp[1], os.path.join(output_dir, os.path.basename(args.inp[1])))  
+  if (args.pe):
+    os.symlink(args.inp[1], os.path.join(output_dir, os.path.basename(args.inp[1])))  
   
   trimmed_SE = os.path.basename(args.inp[0])
   trimmed_R1 = os.path.basename(args.inp[0])
-  trimmed_R2 = os.path.basename(args.inp[1])
+  trimmed_R2 = ''
+  if (args.pe):
+    trimmed_R2 = os.path.basename(args.inp[1])
   
 if (args.screening) == False:
   BioBloomCategorizer = False
+
  
 script_location = os.path.dirname(sys.argv[0])
 script_dir = os.path.abspath(script_location) 

@@ -106,8 +106,9 @@ if os.path.exists(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_kra
   os.remove(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_kraken_output.txt")
 if os.path.exists(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads.fastq"):
   os.remove(os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_25000_reads.fastq")
-if os.path.exists(os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads.fastq"):
-  os.remove(os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads.fastq")  
+if (args.pe):
+  if os.path.exists(os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads.fastq"):
+    os.remove(os.path.basename(args.inp[1].replace(".fastq.gz", "")) + "_25000_reads.fastq")  
 
 
   
