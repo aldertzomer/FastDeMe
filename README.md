@@ -70,24 +70,69 @@ Bloom filters for the remaining species in vertebrate_mammalian and vertebrate_o
 Output obviously depends on what modules are used for analysis. The following files are expected as output for each module:
 
 ### Trimming
+QC report
+
+`<prefix>_QC_results.txt`
+
 For paired end:
+
 `<prefix>_trimmed_1.fastq.gz`
+
 `<prefix>_trimmed_2.fastq.gz`
+
 For single end:
+
 `<prefix>_trimmed.fastq.gz`
 
 ### Screening
 For paired end:
+
 `<prefix>_noMatch_1.fastq`
+
 `<prefix>_noMatch_2.fastq`
+
+`<prefix>_GCF*.fna.gz_1.`
+
+`<prefix>_GCF*.fna.gz_2.`
+
 For single end:
+
 `<prefix>_noMatch.fastq`
 
-These files are the same as the trimmed files, but with host contamination removed.
+`<prefix>_GCF*.fna.gz.`
+
+These files contain the (trimmed) fastq files with removed host DNA (`noMatch`) and the removed host reads (`GCF`).
 
 ### Kaiju
+Output for Kaiju depends on which taxonomic rank is selected. 
 
+`<prefix>_<tax_rank>_kaiju_summary.txt`
 
+These files contain the names and abundance of the selected taxonomic ranks in the samples.
+
+### Kraken2
+Output for Kraken2 depends on which taxonomic rank is selected.
+
+`<prefix>_<tax_rank>.bracken`
+
+Contains output of Bracken, sorted by taxonomic rank.
+
+`<prefix>_kraken_report.txt`
+
+Contains output of Kraken2.
+
+`<prefix>_kraken_report_bracken.txt`
+
+Contains all output of Bracken. 
+
+### GROOT
+`<prefix>_groot_report.txt`
+
+Contains information about the found antibiotic resistance genes.
+
+`/output_folder/<prefix>_groot/`
+
+Folder with `.gfa` files of the found antibioitc resistance genes.
 
 ## Options
 ```
@@ -107,8 +152,8 @@ usage: wrapper.py --inp file.fastq.gz --output /path/to/output/folder/ [OPTIONS]
                        ranks.                       
   --prefix PREFIX      prefix for all output files, default is name of input
                        file(s)                       
-  --trimming           turn off trimming with fastp  
-  --screening          turn off host contamination screening with mash and
+  --trimming           turn on trimming with fastp  
+  --screening          turn on host contamination screening with mash and
                        BioBloomCategorizer                       
   --output OUTPUT      set output directory
 ```
@@ -152,10 +197,4 @@ Will P M Rowe, Martyn D Winn; Indexed variation graphs for efficient and accurat
 
 [GitHub](https://github.com/will-rowe/groot)
 
-<<<<<<< HEAD
-Update 13-12-2018
-Program no longer crashes when trimming is turned off.
-
-=======
->>>>>>> ae39fedbde489fb6370c29470d685c78af9a876c
 
