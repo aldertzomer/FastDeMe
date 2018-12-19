@@ -1,4 +1,4 @@
-# Project-UU
+ # Project-UU
 
 A fast, easy solution for metagenomic data analysis.
 
@@ -15,15 +15,17 @@ After downloading, the program can be invoked with `wrapper.py`.
 ## Usage
 The program has two mandatory arguments, `--inp` and `--output`. To use the basic version of the program, the following command can be ran:
 
-`./wrapper.py --inp file.fastq.gz --output /path/to/output/folder/`
+`./wrapper.py --inp file.fastq.gz --output /path/to/output/folder/ --trimming`
 
-This will only result in the file getting trimmed and screened for host contamination, which are on by default.
+This will only result in the file getting trimmed.
 
-To run perform taxonomic classification using Kaiju and resistome analysis using GROOT with paired end files without host contamination screening, issue the following command:
+To trim, screen the input files for host contamination, perform taxonomic identification with Kaiju and analyse the resistome the following command can be used:
 
-`./wrapper.py --pe --inp file_R1.fastq.gz file_R2.fastq.gz --output /path/to/output/folder/ --kaiju --groot --screening`
+`./wrapper.py --pe --inp file_R1.fastq.gz file_R2.fastq.gz --output /path/to/output/folder/ --trimming --screening --kaiju --groot`
 
-The flag `--pe` is needed when using paired end files. `--kaiju` and `--groot` turn on the respective programs, and `--screening` will skip the screening process.
+The flag `--pe` is needed when using paired end files. `--kaiju`, `--groot`, `--trimming` and `--screening` turn on the respective modules. 
+
+16 CPU cores will be used by default. To limit or increase the amount of CPU cores used, one can use `--threads`. Note that trimming will not use more than 16 cores, even when more are specified.
 
 ## Database information
 ### GROOT
