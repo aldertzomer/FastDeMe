@@ -126,7 +126,7 @@ if os.path.exists("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", 
 if os.path.exists("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.tab"):
   os.remove("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.tab")
       
-"/mnt/data/klif/svermeulen/Scripts_test/test_map/Kip/lmao/test_R1_small_multiMatch."
+
     
      
      
