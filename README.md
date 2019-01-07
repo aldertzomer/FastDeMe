@@ -23,7 +23,7 @@ To trim, screen the input files for host contamination, perform taxonomic identi
 
 `./wrapper.py --pe --inp file_R1.fastq.gz file_R2.fastq.gz --output /path/to/output/folder/ --trimming --screening --kaiju --groot`
 
-The flag `--pe` is needed when using paired end files. `--kaiju`, `--groot`, `--trimming` and `--screening` turn on the respective modules. 
+The flag `--pe` is needed when using paired end files. `--kaiju`, `--groot`, `--kraken` `--trimming` and `--screening` turn on the respective modules. 
 
 16 CPU cores will be used by default. To limit or increase the amount of CPU cores used, one can use `--threads`. Note that trimming will not use more than 16 cores, even when more are specified.
 
