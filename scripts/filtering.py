@@ -37,10 +37,10 @@ print "Running mash screen"
 
 
 if (args.pe):
-  os.system('{} screen -w -p {} {} {} | sort -gr - | head > {}'.format(os.path.join(script_dir, "binaries/mash"), args.threads, os.path.join(script_dir, "db/mash_db/vertebrate.msh"), os.path.join(output_dir, trimmed_R1), os.path.join(output_dir, "screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.tab")))  
+  os.system('{} screen -w -p {} {} {} | sort -gr - | head > {}'.format(os.path.join(script_dir, "binaries/mash"), args.threads, os.path.join(script_dir, "db/mash_db/vertebrate.msh"), os.path.join(output_dir, trimmed_R1), os.path.join(output_dir, "screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.csv")))  
     
 if not (args.pe):
-  os.system('{} screen -w -p {} {} {} | sort -gr - | head > {}'.format(os.path.join(script_dir, "binaries/mash"), args.threads, os.path.join(script_dir, "db/mash_db/vertebrate.msh"), os.path.join(output_dir, trimmed_SE), os.path.join(output_dir, trimmed_R1), os.path.join(output_dir, "screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.tab")))  
+  os.system('{} screen -w -p {} {} {} | sort -gr - | head > {}'.format(os.path.join(script_dir, "binaries/mash"), args.threads, os.path.join(script_dir, "db/mash_db/vertebrate.msh"), os.path.join(output_dir, trimmed_SE), os.path.join(output_dir, trimmed_R1), os.path.join(output_dir, "screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.csv")))  
 
 
 
@@ -48,7 +48,7 @@ print "Done"
 
 if (args.pe):
   i = 1
-  with open("{}".format(os.path.join(output_dir, trimmed_R1), os.path.join(output_dir, "screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.tab")), 'rb') as file_1:
+  with open("{}".format(os.path.join(output_dir, "screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.csv")), 'rb') as file_1:
     for row in csv.reader(file_1, delimiter='\t'):
       while i <= 1:
         identity = row[0]
@@ -59,7 +59,7 @@ if (args.pe):
 
 if not (args.pe):
   i = 1
-  with open("{}".format(os.path.join(output_dir, trimmed_R1), os.path.join(output_dir, "screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.tab")), 'rb') as file_1:
+  with open("{}".format(os.path.join(output_dir, "screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.csv")), 'rb') as file_1:
     for row in csv.reader(file_1, delimiter='\t'):
       while i <= 1:
         identity = row[0]
@@ -68,11 +68,15 @@ if not (args.pe):
         i += 1
   hashes=hashes.replace("/1000", "")
 
+print os.path.basename(species)
 
 filter_exists = os.path.isfile(species + ".bf")
-if float(identity) > 0.8 and int(hashes) > 10 and filter_exists == False:
-  print "filter not included in standard BioBloomCategorizer database, please download {} or turn off filtering".format(os.path.basename(species))
-  sys.exit()
+if filter_exists == False:
+  print "Contamination detected but filter was not found. Downloading filter..."
+      
+  os.system('wget {} -P {}'.format("http://klif.uu.nl/download/metagenomics_db/" + species.replace("./db/mash_db/", "").replace(".fna.gz", ".fna.gz.bf"), os.path.dirname(species)))
+  
+  os.system('wget {} -P {}'.format("http://klif.uu.nl/download/metagenomics_db/" + species.replace("./db/mash_db/", "").replace(".fna.gz", ".fna.gz.txt"), os.path.dirname(species)))
 
 global BioBloomCategorizer  
 BioBloomCategorizer = False
@@ -118,11 +122,11 @@ if noPrefix == False:
   if os.path.exists(os.path.join(output_dir, args.prefix) + "_summary.tsv"):
     os.remove(os.path.join(output_dir, args.prefix) + "_summary.tsv")
 
-if os.path.exists("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.tab"):
-  os.remove("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.tab")
+if os.path.exists("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.csv"):
+  os.remove("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed.csv")
 
-if os.path.exists("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.tab"):
-  os.remove("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.tab")
+if os.path.exists("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.csv"):
+  os.remove("screen_" + os.path.basename(args.inp[0].replace(".fastq.gz", "")) + "_trimmed_1.csv")
       
 
     
