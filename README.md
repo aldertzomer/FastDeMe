@@ -1,4 +1,4 @@
- # Project-UU
+# Project-UU
 
 A fast, easy solution for metagenomic data analysis.
 
@@ -66,7 +66,7 @@ Species in standard database|GCF ID
 *Gallus gallus*|GCF_000002315.5
 *Meleagris gallopavo*|GCF_000146605.2
 
-Bloom filters for the remaining species in vertebrate_mammalian and vertebrate_other can be downloaded separately. In cases were the contaminating factor is not known in advance, the program will output the GCF ID of the missing species so it can be downloaded and included by the user. This download consist of a folder containing a `.bf` and `.txt` file. The folder should be put in either `db/mash_db/vertebrate/refseq/vertebrate_mammalian` or `db/mash_db/vertebrate/refseq/vertebrate_other` depending on the species.
+In case contamination is detected and the host is not in the standard database, the corresponding bloom filter will be downloaded automatically.
 
 ## Output
 Output obviously depends on what modules are used for analysis. The following files are expected as output for each module:
