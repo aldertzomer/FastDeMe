@@ -19,7 +19,7 @@ The program has two mandatory arguments, `--inp` and `--output`. To use the basi
 
 This will only result in the file getting trimmed.
 
-To trim, screen the input files for host contamination, perform taxonomic identification with Kaiju and analyse the resistome the following command can be used:
+To trim, screen the input files for host contamination, perform taxonomic identification with Kaiju and analyse the resistome with GROOT the following command can be used:
 
 `./wrapper.py --pe --inp file_R1.fastq.gz file_R2.fastq.gz --output /path/to/output/folder/ --trimming --screening --kaiju --groot`
 
