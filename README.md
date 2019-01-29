@@ -142,12 +142,15 @@ Folder with `.gfa` files of the found antibioitc resistance genes.
 
 ### KMA
 `<prefix>_kma.aln`
+
 Contains  alignments of resistance genes against input.
 
 `<prefix>_kma.fsa`
+
 Contains sequences of found resistance genes in FASTA format.
 
 `<prefix>_kma.res`
+
 Contains information about the found antibiotic resistance genes.
 
 ## Options
