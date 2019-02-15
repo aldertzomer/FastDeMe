@@ -20,6 +20,7 @@ parser.add_argument("--threads", help="specify number of threads to be used, def
 parser.add_argument("--kaiju", help="use kaiju for taxonomic identification", action="store_true", default=False)
 parser.add_argument("--kraken", help="use kraken2 for taxonomic identification", action="store_true", default=False)
 parser.add_argument("--groot", help="use groot for resistome analysis", action="store_true", default=False)
+parser.add_argument("--kma", help="use kma for resistome analysis", action="store_true", default=False)
 parser.add_argument("--tax_rank", help="set taxonomic rank for output. choose one: phylum, class, order, family, genus, species, default is all ranks.", action="store")
 parser.add_argument("--prefix", help="prefix for all output files, default is name of input file(s)", action="store")
 parser.add_argument("--trimming", help="turn on trimming with fastp", action="store_true", default=False)
@@ -143,5 +144,8 @@ if (args.kraken) == True:
 
 if (args.groot) == True:
   import groot
+
+if (args.kma) == True:
+  import kma
 
 

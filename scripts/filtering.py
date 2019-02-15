@@ -68,15 +68,16 @@ if not (args.pe):
         i += 1
   hashes=hashes.replace("/1000", "")
 
-print os.path.basename(species)
+
 
 filter_exists = os.path.isfile(species + ".bf")
 if filter_exists == False:
-  print "Contamination detected but filter was not found. Downloading filter..."
-      
-  os.system('wget {} -P {}'.format("http://klif.uu.nl/download/metagenomics_db/" + species.replace("./db/mash_db/", "").replace(".fna.gz", ".fna.gz.bf"), os.path.dirname(species)))
-  
-  os.system('wget {} -P {}'.format("http://klif.uu.nl/download/metagenomics_db/" + species.replace("./db/mash_db/", "").replace(".fna.gz", ".fna.gz.txt"), os.path.dirname(species)))
+  if float(identity) > 0.8 and int(hashes) > 10:
+    print "Contamination detected but filter was not found. Downloading filter..."
+        
+    os.system('wget {} -P {}'.format("http://klif.uu.nl/download/metagenomics_db/" + species.replace("./db/mash_db/", "").replace(".fna.gz", ".fna.gz.bf"), os.path.dirname(species)))
+    
+    os.system('wget {} -P {}'.format("http://klif.uu.nl/download/metagenomics_db/" + species.replace("./db/mash_db/", "").replace(".fna.gz", ".fna.gz.txt"), os.path.dirname(species)))
 
 global BioBloomCategorizer  
 BioBloomCategorizer = False
