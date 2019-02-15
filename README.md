@@ -1,4 +1,4 @@
- # Project-UU
+# FastDeMe
 
 A fast, easy solution for metagenomic data analysis.
 
@@ -19,11 +19,11 @@ The program has two mandatory arguments, `--inp` and `--output`. To use the basi
 
 This will only result in the file getting trimmed.
 
-To trim, screen the input files for host contamination, perform taxonomic identification with Kaiju and analyse the resistome the following command can be used:
+To trim, screen the input files for host contamination, perform taxonomic identification with Kaiju and analyse the resistome with GROOT the following command can be used:
 
 `./wrapper.py --pe --inp file_R1.fastq.gz file_R2.fastq.gz --output /path/to/output/folder/ --trimming --screening --kaiju --groot`
 
-The flag `--pe` is needed when using paired end files. `--kaiju`, `--groot`, `--kraken` `--trimming` and `--screening` turn on the respective modules. 
+The flag `--pe` is needed when using paired end files. `--kaiju`, `--groot`, `--kraken` `--trimming`, `--kma` and `--screening` turn on the respective modules. 
 
 16 CPU cores will be used by default. To limit or increase the amount of CPU cores used, one can use `--threads`. Note that trimming will not use more than 16 cores, even when more are specified.
 
@@ -32,13 +32,17 @@ The flag `--pe` is needed when using paired end files. `--kaiju`, `--groot`, `--
 
 The GROOT database consist of a mixture of the ResFinder, ARG-ANNOT and CARD databases. See the [GROOT documentation](https://groot-documentation.readthedocs.io/en/latest/groot-databases.html) for more details.
 
+### KMA
+
+The KMA database consist of the ResFinder database.
+
 ### Kaiju
 
-The Kaiju database was made with assembled and annotated bacterial, archaeal and viral reference genomes from the NCBI RefSeq database.
+The Kaiju database was made with assembled and annotated bacterial reference genomes from the NCBI RefSeq database.
 
 ### Kraken2
 
-The Kraken2 database was made with the complete bacterial/archaeal reference genomes from the NCBI RefSeq database.
+The Kraken2 database was made with the complete bacterial reference genomes from the NCBI RefSeq database.
 
 ### Mash/BioBloomCategorizer
 
@@ -66,7 +70,7 @@ Species in standard database|GCF ID
 *Gallus gallus*|GCF_000002315.5
 *Meleagris gallopavo*|GCF_000146605.2
 
-Bloom filters for the remaining species in vertebrate_mammalian and vertebrate_other can be downloaded separately. In cases were the contaminating factor is not known in advance, the program will output the GCF ID of the missing species so it can be downloaded and included by the user. This download consist of a folder containing a `.bf` and `.txt` file. The folder should be put in either `db/mash_db/vertebrate/refseq/vertebrate_mammalian` or `db/mash_db/vertebrate/refseq/vertebrate_other` depending on the species.
+In case contamination is detected and the host is not in the standard database, the corresponding bloom filter will be downloaded automatically.
 
 ## Output
 Output obviously depends on what modules are used for analysis. The following files are expected as output for each module:
@@ -136,6 +140,19 @@ Contains information about the found antibiotic resistance genes.
 
 Folder with `.gfa` files of the found antibioitc resistance genes.
 
+### KMA
+`<prefix>_kma.aln`
+
+Contains  alignments of resistance genes against input.
+
+`<prefix>_kma.fsa`
+
+Contains sequences of found resistance genes in FASTA format.
+
+`<prefix>_kma.res`
+
+Contains information about the found antibiotic resistance genes.
+
 ## Options
 ```
 usage: wrapper.py --inp file.fastq.gz --output /path/to/output/folder/ [OPTIONS]
@@ -148,7 +165,8 @@ usage: wrapper.py --inp file.fastq.gz --output /path/to/output/folder/ [OPTIONS]
                        available threads up to 16 threads                       
   --kaiju              use kaiju for taxonomic identification  
   --kraken             use kraken2 for taxonomic identification  
-  --groot              use groot for resistome analysis  
+  --groot              use groot for resistome analysis
+  --kma                use kma for resistome analysis
   --tax_rank TAX_RANK  set taxonomic rank for output. choose one: phylum,
                        class, order, family, genus, species, default is all
                        ranks.                       
@@ -198,5 +216,10 @@ Menzel, P. et al. (2016) Fast and sensitive taxonomic classification for metagen
 Will P M Rowe, Martyn D Winn; Indexed variation graphs for efficient and accurate resistome profiling, Bioinformatics, Volume 34, Issue 21, 1 November 2018, Pages 3601–3608, [paper](https://doi.org/10.1093/bioinformatics/bty387)
 
 [GitHub](https://github.com/will-rowe/groot)
+
+### KMA
+Philip T.L.C. Clausen, Frank M. Aarestrup & Ole Lund, "Rapid and precise alignment of raw reads against redundant databases with KMA", BMC Bioinformatics, 2018;19:307. [paper](https://doi.org/10.1186/s12859-018-2336-6)
+
+[BitBucket](https://bitbucket.org/genomicepidemiology/kma)
 
 
