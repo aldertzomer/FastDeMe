@@ -12,13 +12,15 @@ echo "Downloading Kraken2 db"
 wget http://klif.uu.nl/download/metagenomics_db/kraken2_bacteria_db.tar.gz
 echo "Downloading Mash and BioBloomfilter DBs"
 wget http://klif.uu.nl/download/metagenomics_db/mash_db.tar.gz
+echo "Downloading KMA DB"
+wget http://klif.uu.nl/download/metagenomics_db/KMA_ResFinder.tar.gz
 
 echo "Untarring files"
 tar xzvf DB_RefSeq_Virus.tar.gz
 tar xzvf groot-db-32.tar.gz
 tar xzvf kraken2_bacteria_db.tar.gz
 tar xzvf mash_db.tar.gz
-
+tar xzvf KMA_ResFinder.tar.gz
 
 echo "Done"
 echo ""
