@@ -1,6 +1,10 @@
 # FastDeMe
 
-A fast, easy solution for metagenomic data analysis.
+A fast, easy solution for metagenomic data analysis. An outline of the program is given below:
+
+![Screenshot](Metagenomics_pipeline2.png)
+
+A report of FastDeme containing some benchmarks can be found here: [Sander Vermeulen report](http://https://github.com/aldertzomer/FastDeMe/blob/master/Report%20Sander%20Vermeulen.pdf)
 
 ## Installation
 
