@@ -61,7 +61,7 @@ def Kraken2(prefix, input_R1, input_R2, input_SE, input_filtered_R1, input_filte
     os.system('{} --db {} --threads {} --report {}_kraken_report.txt --output {}_kraken_output.txt {}'.format(os.path.join(script_dir, "binaries/kraken2/kraken2"), os.path.join(script_dir, "db/kraken2_bacteria_db"), args.threads, prefix, os.path.basename(args.inp[0].replace(".fastq.gz", "")), os.path.join(output_dir, input_filtered_SE)))
 
 def Bracken(prefix, tax_rank1, tax_rank2, read):
-  os.system("{} -d {} -i {}_kraken_report.txt -o {}_{}.bracken -l {} -r {}".format(os.path.join(script_dir, "binaries/bracken"), os.path.join(script_dir, "db/kraken2_bacteria_db"), prefix, os.path.join(output_dir, prefix), tax_rank2, tax_rank1, read))
+  os.system("{} -d {} -i {}_kraken_report.txt -o {}/{}.bracken -l {} -r {}".format(os.path.join(script_dir, "binaries/bracken"), os.path.join(script_dir, "db/kraken2_bacteria_db"), prefix, os.path.join(output_dir), tax_rank2, tax_rank1, read))
 
 
 Kraken2(args.prefix, trimmed_R1, trimmed_R2, trimmed_SE, filtered_R1, filtered_R2, filtered_SE)
