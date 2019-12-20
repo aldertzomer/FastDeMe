@@ -14,7 +14,8 @@ The program can be downloaded as an archive or with the following git command:
 
 Next, the databases should be downloaded. This can be done by running `getdb.sh` located in the `db/` directory. This will download the four databases that are needed for the program to run and unzip them. Please make sure enough space is available on the drive, since the combined size of the databases is ~165 GB. The combined download size is ~116 GB.
 
-Other requirements include Numpy
+Other requirements include Numpy:
+
 `pip3 install numpy`
 
 After downloading, the program can be invoked with `wrapper.py`.
