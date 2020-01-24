@@ -13,7 +13,7 @@ if (args.trimming) == True:
 def BioBloomCat(prefix, input_R1, input_R2, input_SE):
   if (args.pe) and float(identity) > 0.8 and int(hashes) > 10:
     print "Contamination detected, running BioBloomCategorizer"
-    os.system('{} --fq -e -t {} -p {} -f {} {} {}'.format(os.path.join(script_dir, "binaries/biobloomcategorizer"), args.threads, prefix, species + ".bf", os.path.join(output_dir, input_R1), os.path.join(output_dir, input_R2)))
+    os.system('{} --fq -e -t {} -p {} -f {} {} {}'.format(os.path.join(script_dir, "binaries/biobloomcategorizer"), args.threads, prefix, os.path.join(script_dir, species + ".bf"), os.path.join(output_dir, input_R1), os.path.join(output_dir, input_R2)))
     BioBloomCategorizer = True
     os.system('mv {} {}'.format(prefix + "_noMatch_1.", prefix + "_noMatch_1.fastq"))
     os.system('mv {} {}'.format(prefix + "_noMatch_2.", prefix + "_noMatch_2.fastq"))
@@ -22,7 +22,7 @@ def BioBloomCat(prefix, input_R1, input_R2, input_SE):
   
   if not (args.pe) and float(identity) > 0.8 and int(hashes) > 10:
     print "Contamination detected, running BioBloomCategorizer"
-    os.system('{} --fq -t {} -p {} -f {} {}'.format(os.path.join(script_dir, "binaries/biobloomcategorizer"), args.threads, prefix, species + ".bf", os.path.join(output_dir, input_SE)))
+    os.system('{} --fq -t {} -p {} -f {} {}'.format(os.path.join(script_dir, "binaries/biobloomcategorizer"), args.threads, prefix, os.path.join(script_dir, species + ".bf"), os.path.join(output_dir, input_SE)))
     BioBloomCategorizer = True
     print "Done"
     os.system('mv {} {}'.format(prefix + "_noMatch.", prefix + "_noMatch.fastq"))
@@ -70,7 +70,7 @@ if not (args.pe):
 
 
 
-filter_exists = os.path.isfile(species + ".bf")
+filter_exists = os.path.isfile(os.path.join(script_dir, species + ".bf"))
 if filter_exists == False:
   if float(identity) > 0.8 and int(hashes) > 10:
     print "Contamination detected but filter was not found. Downloading filter..."
