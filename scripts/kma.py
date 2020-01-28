@@ -8,18 +8,22 @@ if (args.screening) == True:
   from filtering import *
 if (args.trimming) == True:
   from QC import *
-  
+
+#not recommended
+import __builtin__
+
+
 def KMA(input_R1, input_R2, input_SE, input_filtered_R1, input_filtered_R2, input_filtered_SE, prefix):
-  if (args.pe) and BioBloomCategorizer == False:
+  if (args.pe) and __builtin__.BioBloomCategorizer == False:
     os.system("{} -ipe {} {} -t_db {} -o {} -t {}".format(os.path.join(script_dir, "binaries/kma"), os.path.join(output_dir, input_R1), os.path.join(output_dir, input_R2), os.path.join(script_dir, "db/KMA_ResFinder/ResFinder"), os.path.join(prefix + "_kma"), args.threads))
   
-  if not (args.pe) and BioBloomCategorizer == False:
+  if not (args.pe) and __builtin__.BioBloomCategorizer == False:
     os.system("{} -i {} -t_db {} -o {} -t {}".format(os.path.join(script_dir, "binaries/kma"), os.path.join(output_dir, input_SE), os.path.join(script_dir, "db/KMA_ResFinder/ResFinder"), os.path.join(prefix + "_kma"), args.threads))
   
-  if (args.pe) and BioBloomCategorizer == True:
+  if (args.pe) and __builtin__.BioBloomCategorizer == True:
     os.system("{} -ipe {} {} -t_db {} -o {} -t {}".format(os.path.join(script_dir, "binaries/kma"), os.path.join(output_dir, input_filtered_R1), os.path.join(output_dir, input_filtered_R2), os.path.join(script_dir, "db/KMA_ResFinder/ResFinder"), os.path.join(prefix + "_kma"), args.threads))
   
-  if not (args.pe) and BioBloomCategorizer == True:
+  if not (args.pe) and __builtin__.BioBloomCategorizer == True:
     os.system("{} -i {} -t_db {} -o {} -t {}".format(os.path.join(script_dir, "binaries/kma"), os.path.join(output_dir, input_filtered_SE), os.path.join(script_dir, "db/KMA_ResFinder/ResFinder"), os.path.join(prefix + "_kma"), args.threads))
 
 print "Running KMA"

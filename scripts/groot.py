@@ -9,6 +9,10 @@ if (args.trimming) == True:
 if (args.screening) == True:
   from filtering import *
 
+#not recommended
+import __builtin__
+
+
 #groot has to know the read length, so this has to be calculated in case the trimming option is turned off by the user.
 
 if (args.trimming) == False:
@@ -46,19 +50,19 @@ if (args.trimming) == False:
     med = median(lengte_reads)
 
 def groot(input_R1, input_R2, prefix, input_SE, input_filtered_R1, input_filtered_R2, input_filtered_SE):
-  if (args.pe) and BioBloomCategorizer == False:
+  if (args.pe) and __builtin__.BioBloomCategorizer == False:
     os.system('{} align -o {} -p {} -i {} -f {} {} | {} report -c 0.2 > {}_groot_report.txt'.format(os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, args.prefix + "_groot"), args.threads, os.path.join(script_dir, "db/groot-db-128-resfinder/groot_index_{}".format(int(med))), os.path.join(output_dir, input_R1), os.path.join(output_dir, input_R2), os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, prefix)))
   
   
-  if not (args.pe) and BioBloomCategorizer == False:
+  if not (args.pe) and __builtin__.BioBloomCategorizer == False:
     os.system('{} align -o {} -p {} -i {} -f {} | {} report -c 0.2 > {}_groot_report.txt'.format(os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, args.prefix + "_groot"), args.threads, os.path.join(script_dir, "db/groot-db-128-resfinder/groot_index_{}".format(int(med))), os.path.join(output_dir, input_SE), os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, prefix)))
   
   
-  if (args.pe) and BioBloomCategorizer == True:
+  if (args.pe) and __builtin__.BioBloomCategorizer == True:
     os.system('{} align -o {} -p {} -i {} -f {} {} | {} report -c 0.2 > {}_groot_report.txt'.format(os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, args.prefix + "_groot"), args.threads, os.path.join(script_dir, "db/groot-db-128-resfinder/groot_index_{}".format(int(med))), os.path.join(output_dir, input_filtered_R1), os.path.join(output_dir, input_filtered_R2), os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, prefix)))
   
   
-  if not (args.pe) and BioBloomCategorizer == True:
+  if not (args.pe) and __builtin__.BioBloomCategorizer == True:
     os.system('{} align -o {} -p {} -i {} -f {} | {} report -c 0.2 > {}_groot_report.txt'.format(os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, args.prefix + "_groot"), args.threads, os.path.join(script_dir, "db/groot-db-128-resfinder/groot_index_{}".format(int(med))), os.path.join(output_dir, input_filtered_SE), os.path.join(script_dir, "binaries/groot"), os.path.join(output_dir, prefix)))
   
 

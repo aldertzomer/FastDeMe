@@ -9,21 +9,26 @@ if (args.screening) == True:
 if (args.trimming) == True:
   from QC import *
 
+#not recommended
+import __builtin__
+
 print "Running Kaiju"
 
 #Running Kaiju definition
 
 def Kaiju(input_R1, input_R2, prefix, input_SE, input_filtered_R1, input_filtered_R2, input_filtered_SE):
-  if (args.pe) and BioBloomCategorizer == False:
+  if (args.pe) and __builtin__.BioBloomCategorizer == False:
+    os.system("echo pe and BBCFALSE")
     os.system('{} -v -t {} -f {} -i {} -j {} -a mem -z {} -o {}_kaiju.txt'.format(os.path.join(script_dir, "binaries/kaiju"), os.path.join(script_dir, "db/DB_RefSeq_Virus/nodes.dmp"), os.path.join(script_dir, "db/DB_RefSeq_Virus/kaiju_db.fmi"), os.path.join(output_dir, input_R1), os.path.join(output_dir, input_R2), args.threads, os.path.basename(args.inp[0].replace(".fastq.gz", ""))))
     
-  if not (args.pe) and BioBloomCategorizer == False:
+  if not (args.pe) and __builtin__.BioBloomCategorizer == False:
     os.system('{} -v -t {} -f {} -i {} -a mem -z {} -o {}_kaiju.txt'.format(os.path.join(script_dir, "binaries/kaiju"), os.path.join(script_dir, "db/DB_RefSeq_Virus/nodes.dmp"), os.path.join(script_dir, "db/DB_RefSeq_Virus/kaiju_db.fmi"), os.path.join(output_dir, input_SE), args.threads, os.path.basename(args.inp[0].replace(".fastq.gz", ""))))
     
-  if (args.pe) and BioBloomCategorizer == True:
+  if (args.pe) and __builtin__.BioBloomCategorizer == True:
+    os.system("echo pe and BBCtrue")
     os.system('{} -v -t {} -f {} -i {} -j {} -a mem -z {} -o {}_kaiju.txt'.format(os.path.join(script_dir, "binaries/kaiju"), os.path.join(script_dir, "db/DB_RefSeq_Virus/nodes.dmp"), os.path.join(script_dir, "db/DB_RefSeq_Virus/kaiju_db.fmi"), os.path.join(output_dir, input_filtered_R1), os.path.join(output_dir, input_filtered_R2), args.threads, os.path.basename(args.inp[0].replace(".fastq.gz", ""))))
   
-  if not (args.pe) and BioBloomCategorizer == True:
+  if not (args.pe) and __builtin__.BioBloomCategorizer == True:
     os.system('{} -v -t {} -f {} -i {} -a mem -z {} -o {}_kaiju.txt'.format(os.path.join(script_dir, "binaries/kaiju"), os.path.join(script_dir, "db/DB_RefSeq_Virus/nodes.dmp"), os.path.join(script_dir, "db/DB_RefSeq_Virus/kaiju_db.fmi"), os.path.join(output_dir, input_filtered_SE), args.threads, os.path.basename(args.inp[0].replace(".fastq.gz", ""))))
 
 def kaijuReport(tax_rank, prefix):
