@@ -4,6 +4,9 @@ import gzip, os, numpy, argparse, linecache, sys, multiprocessing
 from numpy import median
 from Bio import SeqIO
 
+#not recommended
+import __builtin__
+
 def cpu_threads(max_threads):  
   if multiprocessing.cpu_count() > max_threads:
     return max_threads
@@ -121,7 +124,7 @@ if (args.trimming) == False and (args.screening) == False:
     trimmed_R2 = os.path.basename(args.inp[1])
   
 if (args.screening) == False:
-  BioBloomCategorizer = False
+  __builtin__.BioBloomCategorizer = False
 
  
 script_location = os.path.dirname(sys.argv[0])
