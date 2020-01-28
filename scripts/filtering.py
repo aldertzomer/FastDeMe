@@ -30,9 +30,10 @@ def BioBloomCat(prefix, input_R1, input_R2, input_SE):
     os.system('mv {} {}'.format(prefix + "_noMatch.", prefix + "_noMatch.fastq"))
   if float(identity) < 0.8 and int(hashes) < 10:
     print "No contamination detected"
-  
+    __builtin__.BioBloomCategorizer = False
   if float(identity) < 0.8 and int(hashes) > 50:
     print "Contamination detected but unable to filter. Program will continue, but results might not be optimal"
+    __builtin__.BioBloomCategorizer = False
 
 print "Running mash screen"
 
