@@ -51,7 +51,6 @@ print "Running Kraken2"
 
 def Kraken2(prefix, input_R1, input_R2, input_SE, input_filtered_R1, input_filtered_R2, input_filtered_SE):
   if (args.pe) and __builtin__.BioBloomCategorizer == False:
-    os.system('echo pe bbccfalse')
     os.system('{} --db {} --threads {} --report {}_kraken_report.txt --output {}_kraken_output.txt --paired {} {}'.format(os.path.join(script_dir, "binaries/kraken2/kraken2"), os.path.join(script_dir, "db/kraken2_bacteria_db"), args.threads, prefix, os.path.basename(args.inp[0].replace(".fastq.gz", "")), os.path.join(output_dir, input_R1), os.path.join(output_dir, input_R2)))
   
   if not (args.pe) and __builtin__.BioBloomCategorizer == False:
@@ -59,7 +58,6 @@ def Kraken2(prefix, input_R1, input_R2, input_SE, input_filtered_R1, input_filte
   
   
   if (args.pe) and __builtin__.BioBloomCategorizer == True:
-    os.system('echo pe bbctrue')
     os.system('{} --db {} --threads {} --report {}_kraken_report.txt --output {}_kraken_output.txt --paired {} {}'.format(os.path.join(script_dir, "binaries/kraken2/kraken2"), os.path.join(script_dir, "db/kraken2_bacteria_db"), args.threads, prefix, os.path.basename(args.inp[0].replace(".fastq.gz", "")), os.path.join(output_dir, input_filtered_R1), os.path.join(output_dir, input_filtered_R2)))
     
   if not (args.pe) and __builtin__.BioBloomCategorizer == True:
