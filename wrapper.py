@@ -22,7 +22,6 @@ parser.add_argument("--inp", help="input files in fastq.gz format, if paired-end
 parser.add_argument("--threads", help="specify number of threads to be used, default is max available threads up to 16 threads", default=cpu_threads(16), required=False, type=int)
 parser.add_argument("--kaiju", help="use kaiju for taxonomic identification", action="store_true", default=False)
 parser.add_argument("--kraken", help="use kraken2 for taxonomic identification", action="store_true", default=False)
-parser.add_argument("--groot", help="use groot for resistome analysis", action="store_true", default=False)
 parser.add_argument("--kma", help="use kma for resistome analysis", action="store_true", default=False)
 parser.add_argument("--tax_rank", help="set taxonomic rank for output. choose one: phylum, class, order, family, genus, species, default is all ranks.", action="store")
 parser.add_argument("--prefix", help="prefix for all output files, default is name of input file(s)", action="store")
@@ -144,9 +143,6 @@ if (args.kaiju) == True:
   
 if (args.kraken) == True:
   import Kraken
-
-if (args.groot) == True:
-  import groot
 
 if (args.kma) == True:
   import kma
